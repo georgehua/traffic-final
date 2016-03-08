@@ -33,8 +33,9 @@ shinyServer(function(input, output) {
     leaflet() %>%
       addProviderTiles("Stamen.Toner") %>%  # Add default OpenStreetMap map tiles
       addMarkers(lat=47.617337, lng=-122.188505, popup="Start and End of I-405 Toll Lanes") %>% 
-      addMarkers(lat=47.827635, lng=-122.256036, popup="Start and End of I-405 Toll Lanes") %>% 
-      fitBounds(-122.152380, 47.462732, -122.286687, 47.838077) %>% 
+      addMarkers(lat=47.827635, lng=-122.256036, popup="Start and End of I-405 Toll Lanes") %>%
+      setView(-122.204999, 47.756524, zoom = 10) %>% 
+      setMaxBounds(-122.158107, 47.834960, -122.281611, 47.598195) %>% 
       addPolylines(
         lng=points_I5_to_SR522$X2, lat=points_I5_to_SR522$X1, stroke = TRUE, opacity = 1, smoothFactor = 0.5,
         color = "#FF0000", weight = 10, popup="test") %>% 
