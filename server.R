@@ -1,7 +1,7 @@
 library(shiny)
 library(dplyr)
 library(plotly)
-setwd("/Users/Joycie/info498f/traffic-final/data(new)")
+setwd("/Users/hongtianxuhua/Documents/info498f/traffic-final/data(new)")
 B_520_70 <- read.csv("Before SR 520 to NE 70th.csv")
 A_520_70 <- read.csv("After SR 520 to NE 70.csv")
 #B_I5_527 <- read.csv("Before I-5 to SR527.csv")
