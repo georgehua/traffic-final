@@ -12,24 +12,10 @@ A_8_527 <- read.csv("After 8th to SR 527.csv")
 B_8_527 <- read.csv("Before 8th to SR 527.csv")
 
 shinyServer(function(input, output) {
-  output$plotBefore <- renderPlotly({
-    if (input$select == 1) {
-      data1 = B_520_70
-    } else if (input$select == 2) {
-      data1 = B_I5_522
-    } else {
-      data1 = B_8_527
-    }
-    plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers")
-  })
-  output$plotAfter <- renderPlotly({
-    if (input$select == 1) {
-      data2 = A_520_70
-    } else if (input$select == 2) {
-      data2 = A_I5_522
-    } else {
-      data2 = A_8_527
-    }
-    plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers")
-  })
+  
+  # You can access the value of the widget with input$slider1, e.g.
+  output$value <- renderPrint({ input$slider1 })
+  
+  # You can access the values of the second widget with input$slider2, e.g.
+  output$range <- renderPrint({ input$slider2 })
 })

@@ -15,20 +15,26 @@ A_8_527 <- read.csv("After 8th to SR 527.csv")
 B_8_527 <- read.csv("Before 8th to SR 527.csv")
 
 shinyUI(fluidPage(
-  titlePanel("Traffic Sux"),
-  sidebarPanel(
-    selectInput("select", label = h3("Select Corridor"), 
-              choices = list("520 to 70" = 1, "I-5 to 522" = 2, "8th to 527" == 3), 
-              selected = 1)
+  fluidRow(
+    column(4,
+           
+           # Copy the line below to make a slider bar 
+           sliderInput("slider1", label = h3("Slider"), min = 0, 
+                       max = 100, value = 50)
+    ),
+    column(4,
+           
+           # Copy the line below to make a slider range 
+           sliderInput("slider2", label = h3("Slider Range"), min = 0, 
+                       max = 100, value = c(40, 60))
+    )
   ),
-  mainPanel(
-    plotlyOutput("plotBefore"),
-    plotlyOutput("plotAfter")
+  
+  hr(),
+  
+  fluidRow(
+    column(4, verbatimTextOutput("value")),
+    column(4, verbatimTextOutput("range"))
   )
-  
-  
-  
-  
-  
   
 ))
