@@ -1,5 +1,5 @@
 library(dplyr)
-
+setwd("/Users/hongtianxuhua/Documents/info498f/traffic-final")
 B_520_70 <- read.csv("data(new)/Before SR 520 to NE 70th.csv")
 A_520_70 <- read.csv("data(new)/After SR 520 to NE 70.csv")
 

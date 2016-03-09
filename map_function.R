@@ -28,19 +28,20 @@ points_SR520_NE70th <- parseData(url_SR520_NE70th)
 
 build_map <- function(data_avg, input_slider, dataset) {
   data <- eval(parse(text = dataset))
-  input_slider_value <- data_avg[data_avg$name==input_slider,"average"]
+  input_slider_value <- data_avg[which(data_avg$name == 1.0 * input_slider),"average"]
+  input_slider_value <- as.numeric(input_slider_value)
   
   pal <- colorNumeric(
-  palette = "Green",
+  palette = "Red",
   domain = input_slider_value
   )
   
   m <- leaflet() %>%
     addProviderTiles("CartoDB.Positron") %>%  # Add default OpenStreetMap map tiles
-    setView(lng = -122.152380, lat = 47.462732, zoom = 9) %>% 
+    fitBounds(lng1 = min(data$X2), lat1 = max(data$X1), lng2 = max(data$X2), lat2 = min(data$X1)) %>% 
     addPolylines(
-      lng=data$X2, lat=data$X1, stroke = TRUE, opacity = input_slider_value/100+0.2, smoothFactor = 0.5,
-      color = pal(data_avg), weight = input_slider_value/80+5) 
+      lng=data$X2, lat=data$X1, stroke = TRUE, opacity = input_slider_value/1000+0.3, smoothFactor = 0.5,
+      color = pal(input_slider_value), weight = round(input_slider_value/80, digits=0)+10)
     
   return(m)
 }
