@@ -16,18 +16,20 @@ parseData <- function(url) {
 points_SR520_NE70th <- parseData(url_SR520_NE70th)
 
 
-build_map <- function(dataset) {
-#  pal <- colorNumeric(
- #   palette = "Green",
-#    domain = data_avg$average
-#  )
+build_map <- function(dataset, data_avg, input) {
+  
+  pal <- colorNumeric(
+  palette = "Green",
+  domain = data_avg[data_avg$name==input,"average"]
+  )
+  
   m <- leaflet() %>%
     addProviderTiles("Stamen.Toner") %>%  # Add default OpenStreetMap map tiles
-    addMarkers(lat=47.617337, lng=-122.188505, popup="Start and End of I-405 Toll Lanes") %>% 
-    addMarkers(lat=47.827635, lng=-122.256036, popup="Start and End of I-405 Toll Lanes") %>% 
     fitBounds(-122.152380, 47.462732, -122.286687, 47.838077) %>% 
     addPolylines(
-      lng=dataset$X2, lat=dataset$X1, stroke = TRUE, opacity = 0.1, smoothFactor = 0.5,
-      color = "green", weight = 10)
+      lng=dataset$X2, lat=dataset$X1, stroke = TRUE, opacity = 0.4, smoothFactor = 0.5,
+      color = pal(data_avg), weight = 10)
+  
   return(m)
 }
+

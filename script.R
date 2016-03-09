@@ -1,3 +1,4 @@
+library(dplyr)
 
 B_520_70 <- read.csv("data(new)/Before SR 520 to NE 70th.csv")
 A_520_70 <- read.csv("data(new)/After SR 520 to NE 70.csv")
@@ -8,7 +9,7 @@ create_name <- function(dataset) {
   dataset$name
   for(i in 0:47) {
     for(j in 1:6) {
-      dataset[j + 6 * i,'name'] <- i + 1
+      dataset[j + 6 * i,'name'] <- (i + 1) / 2
     }
   }
   return(dataset)

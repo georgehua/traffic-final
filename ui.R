@@ -3,7 +3,8 @@ setwd("/Users/hongtianxuhua/Documents/info498f/traffic-final")
 library(shiny)
 library(dplyr)
 library(plotly)
-
+library(leaflet)
+library(sp)
 
 shinyUI(fluidPage(
 
@@ -14,8 +15,8 @@ shinyUI(fluidPage(
                        max = 24, step=0.5, animate=TRUE, value = 0)
     )
   ),
-  mainPanel(
-    plotlyOutput("testPlot")
-  )
+    mainPanel(
+      plotlyOutput("testPlot")
+    )
   
 ))
