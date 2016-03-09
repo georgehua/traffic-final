@@ -32,8 +32,8 @@ build_map <- function(data_avg, input_slider, dataset) {
   input_slider_value <- as.numeric(input_slider_value)
   
   pal <- colorNumeric(
-  palette = "Red",
-  domain = input_slider_value
+  palette = c("green", "red"),
+  domain = data_avg$average
   )
   
   m <- leaflet() %>%
