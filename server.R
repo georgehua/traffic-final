@@ -29,18 +29,44 @@ points_SR520_NE70th <- parseData(url_SR520_NE70th)
 
 
 shinyServer(function(input, output) {
-  output$mymap <- renderLeaflet({
-    leaflet() %>%
-      addProviderTiles("Stamen.Toner") %>%  # Add default OpenStreetMap map tiles
-      addMarkers(lat=47.617337, lng=-122.188505, popup="Start and End of I-405 Toll Lanes") %>% 
-      addMarkers(lat=47.827635, lng=-122.256036, popup="Start and End of I-405 Toll Lanes") %>%
-      setView(-122.204999, 47.756524, zoom = 10) %>% 
-      setMaxBounds(-122.158107, 47.834960, -122.281611, 47.598195) %>% 
-      addPolylines(
-        lng=points_I5_to_SR522$X2, lat=points_I5_to_SR522$X1, stroke = TRUE, opacity = 1, smoothFactor = 0.5,
-        color = "#FF0000", weight = 10, popup="test") %>% 
-      addPolylines(
+    
+  create_map2 <- eventReactive(input$render, {
+    p <- leaflet() %>%
+    addProviderTiles("Stamen.Toner") 
+    
+    if (input$corridor == "8th_to_SR527") {
+      p <- addPolylines(p,
         lng=points_8th_to_SR527$X2, lat=points_8th_to_SR527$X1, stroke = TRUE, fillOpacity = 1, smoothFactor = 0.5,
+        color = "#0000FF") %>%
+        setView(-122.191008, 47.707725, zoom = 11) %>% 
+        setMaxBounds(-122.162081, 47.806302, -122.221756, 47.603087)
+    } else if (input$corridor == "Bell_to_Totemlk") {
+      p <- addPolylines(p,
+        lng=points_Bell_to_Totemlk$X2, lat=points_Bell_to_Totemlk$X1, stroke = TRUE, fillOpacity = 1, smoothFactor = 0.5,
         color = "#0000FF")
+    } else if (input$corridor == "I5_to_SR522") {
+      p <- addPolylines(p,
+        lng=points_I5_to_SR522$X2, lat=points_I5_to_SR522$X1, stroke = TRUE, fillOpacity = 1, smoothFactor = 0.5,
+        color = "#0000FF")        
+    } else if (input$corridor == "I5_to_SR527") {
+      p <- addPolylines(p,
+        lng=points_I5_to_SR527$X2, lat=points_I5_to_SR527$X1, stroke = TRUE, fillOpacity = 1, smoothFactor = 0.5,
+        color = "#0000FF")   
+    } else if (input$corridor == "NE85th_SR520") {
+      p <- addPolylines(p,
+        lng=points_NE85th_SR520$X2, lat=points_NE85th_SR520$X1, stroke = TRUE, fillOpacity = 1, smoothFactor = 0.5,
+        color = "#0000FF")    
+    } else if (input$corridor == "SR520_NE70th") {
+      p <- addPolylines(p,
+        lng=points_SR520_NE70th$X2, lat=points_SR520_NE70th$X1, stroke = TRUE, fillOpacity = 1, smoothFactor = 0.5,
+        color = "#0000FF")
+    }
+      
+      
+    return(p)
+  })
+    
+  output$mymap <- renderLeaflet({
+    create_map2()
   })
 })

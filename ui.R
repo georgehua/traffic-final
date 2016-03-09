@@ -24,7 +24,8 @@ shinyUI(fluidPage(
                                  "NE85th to SR-520" = 'NE85th_SR520',
                                  "SR-520 to NE70th" = 'SR520_NE70th'
                                  ), 
-                  selected = 'Select...')
+                  selected = 'select'),
+      actionButton("render", "Generate plot")
     ),
     
     mainPanel(
