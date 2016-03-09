@@ -32,14 +32,14 @@ shinyServer(function(input, output) {
     
   create_map2 <- eventReactive(input$render, {
     p <- leaflet() %>%
-    addProviderTiles("Stamen.Toner") 
+    addProviderTiles("CartoDB.Positron") 
+    
+    
     
     if (input$corridor == "8th_to_SR527") {
       p <- addPolylines(p,
         lng=points_8th_to_SR527$X2, lat=points_8th_to_SR527$X1, stroke = TRUE, fillOpacity = 1, smoothFactor = 0.5,
-        color = "#0000FF") %>%
-        setView(-122.191008, 47.707725, zoom = 11) %>% 
-        setMaxBounds(-122.162081, 47.806302, -122.221756, 47.603087)
+        color = "#0000FF")
     } else if (input$corridor == "Bell_to_Totemlk") {
       p <- addPolylines(p,
         lng=points_Bell_to_Totemlk$X2, lat=points_Bell_to_Totemlk$X1, stroke = TRUE, fillOpacity = 1, smoothFactor = 0.5,
