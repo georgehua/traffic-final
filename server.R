@@ -21,7 +21,7 @@ shinyServer(function(input, output) {
       title = "Time"
     )
     y <- list(
-      title = "Before Avg Commute (min)"
+      title = "Before 90 %tile Commute Time  (min)"
     )
     if (input$select == 1) {
       data1 = B_520_70
@@ -45,7 +45,7 @@ shinyServer(function(input, output) {
       title = "Time"
     )
     y <- list(
-      title = "After Avg Commute (min)"
+      title = "After 90 %tile Commute Time (min)"
     )
     if (input$select == 1) {
       data2 = A_520_70
