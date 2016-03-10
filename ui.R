@@ -16,14 +16,17 @@ B_8_527 <- read.csv("Before 8th to SR 527.csv")
 
 shinyUI(fluidPage(
   titlePanel("Traffic Sux"),
-  sidebarPanel(
-    selectInput("select", label = h3("Select Corridor"), 
+  fluidRow(
+    column(4,
+          selectInput("select", label = h3("Select Corridor"), 
               choices = list("520 to 70" = 1, "I-5 to 522" = 2, "8th to 527" == 3), 
-              selected = 1)
+              selected = 1))
   ),
-  mainPanel(
-    plotlyOutput("plotBefore"),
-    plotlyOutput("plotAfter")
+  fluidRow(
+    column(6,
+           plotlyOutput("plotBefore")),
+    column(6,
+          plotlyOutput("plotAfter"))
   )
   
   

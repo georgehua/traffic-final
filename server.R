@@ -20,7 +20,7 @@ shinyServer(function(input, output) {
     } else {
       data1 = B_8_527
     }
-    plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers")
+    plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
   })
   output$plotAfter <- renderPlotly({
     if (input$select == 1) {
@@ -30,6 +30,6 @@ shinyServer(function(input, output) {
     } else {
       data2 = A_8_527
     }
-    plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers")
+    plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
   })
 })
