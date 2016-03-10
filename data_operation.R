@@ -1,7 +1,6 @@
 library(dplyr)
 library(jsonlite)
 
-setwd("/Users/hongtianxuhua/Documents/info498f/traffic-final")
 B_520_70 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
 A_520_70 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20SR%20520%20to%20NE%2070.csv")
 A_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%208th%20to%20SR%20527.csv")
