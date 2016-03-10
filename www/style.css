@@ -1,0 +1,9 @@
+html, body {
+   height: 100%;
+}
+
+#mymap {
+	width:50%;
+	float:left;
+	height:800px;
+}
