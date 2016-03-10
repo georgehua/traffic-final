@@ -27,6 +27,12 @@ ui <- fluidPage(
                             max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
     )
     
+  ),
+  fluidRow(
+    column(6,
+           plotlyOutput("plotBefore")),
+    column(6,
+           plotlyOutput("plotAfter"))
   )
 )
 
@@ -46,6 +52,41 @@ server <- function(input, output) {
   
   # the function that assign every 6 rows(30mins) the same name
   # for the sake of group_by() the dataset
+  output$plotBefore <- renderPlotly({
+
+    
+    if (input$corridor == "Rd_8th_to_SR527") {
+      data1 = B_8th_527
+    } else if (input$corridor == "Rd_I5_to_SR522") {
+      data1 = B_I5_522
+    } else if (input$corridor == "Rd_520_70") {
+      data1 = B_520_70
+    } else if (input$corridor == "Rd_I5_to_SR527") {
+      data1 = B_I5_527
+    } else if (input$corridor == "Rd_NE85th_SR520") {
+      data1 = B_85_520
+    } else {
+      data1 = B_520_70
+    }
+    
+    plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
+  })
+  output$plotAfter <- renderPlotly({
+    if (input$corridor == "Rd_8th_to_SR527") {
+      data2 = A_8th_527
+    } else if (input$corridor == "Rd_I5_to_SR522") {
+      data2 = A_I5_522
+    } else if (input$corridor == "Rd_520_70") {
+      data2 = A_520_70
+    } else if (input$corridor == "Rd_I5_to_SR527") {
+      data2 = A_I5_527
+    } else if (input$corridor == "Rd_NE85th_SR520") {
+      data2 = A_85_520
+    } else {
+      data2 = A_520_70
+    }
+    plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
+  })
   create_name <- function(dataset) {
     dataset$name
     for(i in 0:47) {
