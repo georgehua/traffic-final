@@ -189,7 +189,7 @@ server <- function(input, output) {
         lng=coor_data$X2, lat=coor_data$X1, stroke = TRUE, opacity = 0.5, smoothFactor = 0.5,
         color = pal_B(input_slider_value_B), weight = round(input_slider_value_B/80, digits=0)+10) 
     
-    output$traveltimeB <- renderText({input_slider_value_B/60})
+    output$traveltimeB <- renderText({paste(round(input_slider_value_B/60, digits = 2), "min")})
   })
   observe({
     coor_data <- coor()
@@ -202,7 +202,7 @@ server <- function(input, output) {
         lng=coor_data$X2, lat=coor_data$X1, stroke = TRUE, opacity = 0.5, smoothFactor = 0.5,
         color = pal_A(input_slider_value_A), weight = round(input_slider_value_A/80, digits=0)+10) 
     
-    output$traveltimeA <- renderText({input_slider_value_A/60})
+    output$traveltimeA <- renderText({paste(round(input_slider_value_A/60, digits = 2), "min")})
   })
   
 }

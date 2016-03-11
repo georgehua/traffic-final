@@ -6,8 +6,11 @@ library(leaflet)
 
 # start shiny part
 ui <- fluidPage( theme = "style.css",
-                 headerPanel("Chasing Cars"),
-                 mainPanel("The Slow and The Furious: The Story of Rush Hour Traffic"),
+                 
+                 tags$div(id="innerBody",
+                 
+                 tags$h1("Chasing Cars", tags$h6("The Slow and The Furious: The Story of Rush Hour Traffic")),
+            
                  
                  fluidRow(
                    column(4,   selectInput("corridor", label = h3("Corridor"), 
@@ -38,8 +41,9 @@ ui <- fluidPage( theme = "style.css",
                               max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
                  ),
                  fluidRow(
-                   column(10,
+                   column(12,
                           plotlyOutput("plotBefore"))
                  )
+                )
                 )
 )
