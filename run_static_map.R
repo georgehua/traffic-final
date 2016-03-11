@@ -122,8 +122,8 @@ server <- function(input, output) {
   
   # This is the final df we use for displaying traffic situation
   # Note the difference between A and B
-  B_Rd_520_70_average <- cal_index(B_520_70)
-  A_Rd_520_70_average <- cal_index(A_520_70)
+  B_Rd_SR520_NE70th_average <- cal_index(B_520_70)
+  A_Rd_SR520_NE70th_average <- cal_index(A_520_70)
   B_Rd_8th_to_SR527_average <- cal_index(B_8th_527)
   A_Rd_8th_to_SR527_average <- cal_index(A_8th_527)
   B_Rd_Bellvue_Totem_average <- cal_index(B_Bellvue_totem)
