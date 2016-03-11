@@ -35,16 +35,18 @@ ui <- fluidPage( theme = "style.css",
                    ),
                    column(6,
                           leafletOutput("map2"),
-                          textOutput("traveltimeA"),
-                          textOutput("time_count")
+                          textOutput("traveltimeA")
+                          
                    )
                  ),
+                 
+                 tags$div(id="time", textOutput("time_count")),
                  
                  fluidRow(
 
 
-                   column(12,   tags$div(id="sliderhide",sliderInput("slider", label = h6("Select Time or Press Play"), min = 0.5, 
-                              max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
+                   column(12,   tags$div(id="sliderhide",sliderInput("slider", label = h6("Select Time or Press Play"), min = 1, 
+                                                                     max = 288, step=1, animate= animationOptions(loop = TRUE, interval = 100), value = 0, width = "100%", ticks = FALSE)
                  )),
 
                  fluidRow(

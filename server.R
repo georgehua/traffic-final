@@ -49,12 +49,13 @@ server <- function(input, output) {
       l = 0,
       r = 0,
       b = 100,
-      t = 0,
+      t = 25,
       pad = 4)
     
     # plots graph with after data on top
-    p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", name = "Before")  
-    p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", name = "After") %>% layout(margin = m)
+    p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", name = "Before", showlegend = FALSE)  
+    p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", name = "After") %>% 
+      layout(margin = m, paper_bgcolor = "#000000", plot_bgcolor = "#000000", xaxis = list(gridcolor = "#000000"), yaxis = list(gridcolor = "#000000"))
   })
   
   create_name <- function(dataset) {
