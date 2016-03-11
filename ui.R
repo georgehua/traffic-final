@@ -7,6 +7,7 @@ library(leaflet)
 # start shiny part
 ui <- fluidPage( theme = "style.css",
                  headerPanel("Chasing Cars"),
+                 mainPanel("The Slow and The Furious: The Story of Rush Hour Traffic"),
                  fluidRow(
                    column(6,
                           leafletOutput("map1"),
