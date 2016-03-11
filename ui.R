@@ -8,17 +8,6 @@ library(leaflet)
 ui <- fluidPage( theme = "style.css",
                  headerPanel("Chasing Cars"),
                  mainPanel("The Slow and The Furious: The Story of Rush Hour Traffic"),
-                 fluidRow(
-                   column(6,
-                          leafletOutput("map1"),
-                          textOutput("traveltimeB")
-                   ),
-                   column(6,
-                          leafletOutput("map2"),
-                          textOutput("traveltimeA")
-                   )
-                 ),
-                 hr(),
                  
                  fluidRow(
                    column(4,   selectInput("corridor", label = h3("Corridor"), 
@@ -29,15 +18,28 @@ ui <- fluidPage( theme = "style.css",
                                                           "Southbound I-5 to 527" = "Rd_I5_to_SR527",
                                                           "Southbound 85th to 520" = "Rd_NE85th_SR520" 
                                            ), 
-                                           selected = "Rd_8th_to_SR527")
+                                           selected = "Rd_8th_to_SR527"))
+                 ),
+                 
+                 fluidRow(
+                   column(6,
+                          leafletOutput("map1"),
+                          textOutput("traveltimeB")
                    ),
-                   column(8,   sliderInput("slider", label = h3("Select Time or Press Play"), min = 0.5, 
-                                           max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
+                   column(6,
+                          leafletOutput("map2"),
+                          textOutput("traveltimeA")
                    )
-                   
+                 ),
+                 
+                 fluidRow(
+
+                   column(12,   sliderInput("slider", label = h3("Slider"), min = 0.5, 
+                              max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
                  ),
                  fluidRow(
-                   column(12,
+                   column(10,
                           plotlyOutput("plotBefore"))
                  )
+                )
 )
