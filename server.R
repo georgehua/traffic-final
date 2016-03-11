@@ -23,7 +23,7 @@ server <- function(input, output) {
   # for the sake of group_by() the dataset
   output$plotBefore <- renderPlotly({
     
-    
+    # sorts what user input that selects the database according to chosen corridor
     if (input$corridor == "Rd_8th_to_SR527") {
       data1 = B_8th_527
       data2 = A_8th_527
@@ -44,6 +44,7 @@ server <- function(input, output) {
       data2 = A_SR520_NE70th
     }
     
+    # plots graph with after data on top
     p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", name = "Before")  
     p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", name = "After")
   })

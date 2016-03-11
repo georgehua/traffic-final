@@ -6,7 +6,7 @@ library(leaflet)
 
 # start shiny part
 ui <- fluidPage( theme = "style.css",
-                 titlePanel("Traffic Sux"),
+                 headerPanel("Chasing Cars"),
                  fluidRow(
                    column(6,
                           leafletOutput("map1"),
@@ -30,7 +30,7 @@ ui <- fluidPage( theme = "style.css",
                                            ), 
                                            selected = "Rd_8th_to_SR527")
                    ),
-                   column(8,   sliderInput("slider", label = h3("Slider"), min = 0.5, 
+                   column(8,   sliderInput("slider", label = h3("Select Time or Press Play"), min = 0.5, 
                                            max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
                    )
                    
