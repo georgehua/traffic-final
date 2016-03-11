@@ -44,25 +44,9 @@ server <- function(input, output) {
       data2 = A_SR520_NE70th
     }
     
-    p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "Before")  
-    p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "After")
+    p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", name = "Before")  
+    p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", name = "After")
   })
-  #   output$plotAfter <- renderPlotly({
-  #     if (input$corridor == "Rd_8th_to_SR527") {
-  #       data2 = A_8th_527
-  #     } else if (input$corridor == "Rd_I5_to_SR522") {
-  #       data2 = A_I5_522
-  #     } else if (input$corridor == "Rd_Bellvue_Totem") {
-  #       data2 = A_Bellvue_Totem
-  #     } else if (input$corridor == "Rd_I5_to_SR527") {
-  #       data2 = A_I5_527
-  #     } else if (input$corridor == "Rd_NE85th_SR520") {
-  #       data2 = A_85_520
-  #     } else {
-  #       data2 = A_SR520_NE70th
-  #     }
-  #     plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
-  #   })
   create_name <- function(dataset) {
     dataset$name
     for(i in 0:47) {
