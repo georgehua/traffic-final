@@ -14,7 +14,7 @@ ui <- fluidPage( theme = "style.css",
             
                  tags$div(id="introText", 
                           tags$p("This document describes the travel time changes occurring in the I-405 corridor between downtown Bellevue and I-5 at Lynnwood for different trips.  In all cases, it compares changes in travel times from the Before period of October 1, 2014, to January 1, 2015, before implementation of the Express Toll Lanes, with the After period of October 1, 2015, to January 31, 2016, after the lanes' implementation.  All trips examined are in the general purpose lanes.
-                                 The selected time period, October through January, includes two major holidays, Christmas and New Year's. It also includes some of the worst weather Seattle typically observes during the year.  As a result, both the Before and After periods likely experienced traffic conditions that were more variable than at other times of the year.  Sourced from Mark Hallenbeck")
+                                 The selected time period, October through January, includes two major holidays, Christmas and New Year's. It also includes some of the worst weather Seattle typically observes during the year.  As a result, both the Before and After periods likely experienced traffic conditions that were more variable than at other times of the year.",  tags$sup("Sourced from Mark Hallenbeck"))
                           ),
                  
                  fluidRow(
