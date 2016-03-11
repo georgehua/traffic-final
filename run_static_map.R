@@ -62,36 +62,43 @@ server <- function(input, output) {
     
     if (input$corridor == "Rd_8th_to_SR527") {
       data1 = B_8th_527
-    } else if (input$corridor == "Rd_I5_to_SR522") {
-      data1 = B_I5_522
-    } else if (input$corridor == "Rd_Bellvue_Totem") {
-      data1 = B_Bellvue_Totem
-    } else if (input$corridor == "Rd_I5_to_SR527") {
-      data1 = B_I5_527
-    } else if (input$corridor == "Rd_NE85th_SR520") {
-      data1 = B_85_520
-    } else {
-      data1 = B_SR520_NE70th
-    }
-    
-    plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
-  })
-  output$plotAfter <- renderPlotly({
-    if (input$corridor == "Rd_8th_to_SR527") {
       data2 = A_8th_527
     } else if (input$corridor == "Rd_I5_to_SR522") {
+      data1 = B_I5_522
       data2 = A_I5_522
     } else if (input$corridor == "Rd_Bellvue_Totem") {
+      data1 = B_Bellvue_Totem
       data2 = A_Bellvue_Totem
     } else if (input$corridor == "Rd_I5_to_SR527") {
+      data1 = B_I5_527
       data2 = A_I5_527
     } else if (input$corridor == "Rd_NE85th_SR520") {
+      data1 = B_85_520
       data2 = A_85_520
     } else {
+      data1 = B_SR520_NE70th
       data2 = A_SR520_NE70th
     }
-    plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
+    
+   p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "Before")  
+   p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "After")
   })
+#   output$plotAfter <- renderPlotly({
+#     if (input$corridor == "Rd_8th_to_SR527") {
+#       data2 = A_8th_527
+#     } else if (input$corridor == "Rd_I5_to_SR522") {
+#       data2 = A_I5_522
+#     } else if (input$corridor == "Rd_Bellvue_Totem") {
+#       data2 = A_Bellvue_Totem
+#     } else if (input$corridor == "Rd_I5_to_SR527") {
+#       data2 = A_I5_527
+#     } else if (input$corridor == "Rd_NE85th_SR520") {
+#       data2 = A_85_520
+#     } else {
+#       data2 = A_SR520_NE70th
+#     }
+#     plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
+#   })
   create_name <- function(dataset) {
     dataset$name
     for(i in 0:47) {
