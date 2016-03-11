@@ -24,8 +24,9 @@
 	margin-bottom: 30px;
 }
 
-#traveltimeB, #traveltimeA {
+#traveltimeB, #traveltimeA, .BA {
 	font-size: 1.5em;
+	text-align: center;
 }
 
 p {
@@ -35,5 +36,25 @@ p {
 #time {
 	text-align: center;
 	font-size: 30pt;
+	color: #FFB607;
+}
+
+.irs-single, .irs-to, .irs-from, .irs-max, .irs-min, .leaflet-bottom, .leaflet-right, .modebar {
+	display: none;
+}
+
+.play {
+	height: 100px;
+	width: 100px;
+}
+
+.glyphicon {
+	font-size: 20pt;
+	float: left;
+	margin-top: 10px;
+
+}
+
+.BA {
 	color: #FFB607;
 }

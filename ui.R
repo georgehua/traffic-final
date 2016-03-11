@@ -3,6 +3,7 @@ library(dplyr)
 library(plotly)
 library(jsonlite)
 library(leaflet)
+library(rsconnect)
 
 # start shiny part
 ui <- fluidPage( theme = "style.css",
@@ -30,12 +31,14 @@ ui <- fluidPage( theme = "style.css",
                  
                  fluidRow(
                    column(6,
+                          tags$div(class="BA", "Before"),
                           leafletOutput("map1"),
-                          textOutput("traveltimeB")
+                          tags$div(class="traveltime",textOutput("traveltimeB"))
                    ),
                    column(6,
+                          tags$div(class="BA", "After"),
                           leafletOutput("map2"),
-                          textOutput("traveltimeA")
+                          tags$div(class="traveltime",textOutput("traveltimeA"))
                           
                    )
                  ),
