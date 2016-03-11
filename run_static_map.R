@@ -67,7 +67,7 @@ server <- function(input, output) {
       data2 = A_8th_527
     } else if (input$corridor == "Rd_I5_to_SR522") {
       data1 = B_I5_522
-      data2 = A_8th_527
+      data2 = A_I5_522
     } else if (input$corridor == "Rd_Bellvue_Totem") {
       data1 = B_Bellvue_Totem
       data2 = A_Bellvue_Totem
