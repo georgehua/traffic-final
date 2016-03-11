@@ -58,3 +58,8 @@ p {
 .BA {
 	color: #FFB607;
 }
+
+#sliderhide {
+	padding-left: 25px;
+	padding-right: 25px;
+}

@@ -4,21 +4,34 @@ library(plotly)
 library(jsonlite)
 library(leaflet)
 library(rsconnect)
+library(httr)
 
 server <- function(input, output) {
   
-  B_SR520_NE70th <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
-  A_SR520_NE70th <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20SR%20520%20to%20NE%2070.csv")
-  A_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%208th%20to%20SR%20527.csv")
-  B_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%208th%20to%20SR%20527.csv")
-  A_Bellvue_Totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20Bellevue%20to%20Totem%20Lk.csv")
-  B_Bellvue_Totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20Bell%20to%20Ttm%20Lk.csv")
-  A_I5_522 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20I5%20to%20522.csv")
-  B_I5_522 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%201-5%20to%20522.csv")
-  A_I5_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20I-5%20to%20SR%20527.csv")
-  B_I5_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20I-5%20to%20SR527.csv")
-  A_85_520 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20NE85th%20to%20520.csv")
-  B_85_520 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20NE85th%20to%20520.csv")
+  B_SR520_NE70th <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
+  B_SR520_NE70th <- read.csv(textConnection(content(B_SR520_NE70th, as="text")))
+  A_SR520_NE70th <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20SR%20520%20to%20NE%2070.csv")
+  A_SR520_NE70th <- read.csv(textConnection(content(A_SR520_NE70th, as="text")))
+  A_8th_527 <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%208th%20to%20SR%20527.csv")
+  A_8th_527 <- read.csv(textConnection(content(A_8th_527, as="text")))
+  B_8th_527 <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%208th%20to%20SR%20527.csv")
+  B_8th_527 <- read.csv(textConnection(content(B_8th_527, as="text")))
+  A_Bellvue_Totem <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20Bellevue%20to%20Totem%20Lk.csv")
+  A_Bellvue_Totem <- read.csv(textConnection(content(A_Bellvue_Totem, as="text")))
+  B_Bellvue_Totem <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20Bell%20to%20Ttm%20Lk.csv")
+  B_Bellvue_Totem <- read.csv(textConnection(content(B_Bellvue_Totem, as="text")))
+  A_I5_522 <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20I5%20to%20522.csv")
+  A_I5_522 <- read.csv(textConnection(content(A_I5_522, as="text")))
+  B_I5_522 <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%201-5%20to%20522.csv")
+  B_I5_522 <- read.csv(textConnection(content(B_I5_522, as="text")))
+  A_I5_527 <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20I-5%20to%20SR%20527.csv")
+  A_I5_527 <- read.csv(textConnection(content(A_I5_527, as="text")))
+  B_I5_527 <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20I-5%20to%20SR527.csv")
+  B_I5_527 <- read.csv(textConnection(content(B_I5_527, as="text")))
+  A_85_520 <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20NE85th%20to%20520.csv")
+  A_85_520 <- read.csv(textConnection(content(A_85_520, as="text")))
+  B_85_520 <- GET("http://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20NE85th%20to%20520.csv")
+  B_85_520 <- read.csv(textConnection(content(B_85_520, as="text")))
   
   # the function that assign every 6 rows(30mins) the same name
   # for the sake of group_by() the dataset
@@ -197,7 +210,7 @@ server <- function(input, output) {
       clearShapes() %>% 
       addPolylines(
         lng=coor_data$X2, lat=coor_data$X1, stroke = TRUE, opacity = 0.5, smoothFactor = 0.5,
-        color = pal_B(input_slider_value_B), weight = round(input_slider_value_B/80, digits=0)+10) 
+        color = pal_B(input_slider_value_B), weight = round(input_slider_value_B/100, digits=0)+5) 
     
     output$traveltimeB <- renderText({paste(round(input_slider_value_B/60, digits = 2), "min")})
   })
@@ -212,7 +225,7 @@ server <- function(input, output) {
       clearShapes() %>% 
       addPolylines(
         lng=coor_data$X2, lat=coor_data$X1, stroke = TRUE, opacity = 0.5, smoothFactor = 0.5,
-        color = pal_A(input_slider_value_A), weight = round(input_slider_value_A/80, digits=0)+10) 
+        color = pal_A(input_slider_value_A), weight = round(input_slider_value_A/100, digits=0)+5) 
     
     output$time_count <- renderText({time_A})
     output$traveltimeA <- renderText({paste(round(input_slider_value_A/60, digits = 2), "min")})
