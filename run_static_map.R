@@ -81,7 +81,7 @@ server <- function(input, output) {
     }
     
    p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "Before")  
-   p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "After")
+  # p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "After")
   })
 #   output$plotAfter <- renderPlotly({
 #     if (input$corridor == "Rd_8th_to_SR527") {
