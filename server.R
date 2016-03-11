@@ -49,11 +49,7 @@ server <- function(input, output) {
   })
   create_name <- function(dataset) {
     dataset$name
-    for(i in 0:47) {
-      for(j in 1:6) {
-        dataset[j + 6 * i,'name'] <- (i + 1) / 2
-      }
-    }
+    df <- select(dataset, "Time", "Avg..TTS")
     return(dataset)
   }
   
@@ -157,6 +153,22 @@ server <- function(input, output) {
     as.numeric(return_value)
   })
   
+  # time display added to average df 
+  time_display_A <- reactive({
+    data_avg_A <- average_A()
+    a <- mutate(data_avg_A, time = c("0:00AM", "0:30AM","1:00AM", "1:30AM","2:00AM", "2:30AM",
+                                     "3:00AM", "3:30AM","4:00AM", "4:30AM","5:00AM", "5:30AM",
+                                     "6:00AM", "6:30AM","7:00AM", "7:30AM","8:00AM", "8:30AM",
+                                     "9:00AM", "9:30AM","10:00AM", "10:30AM","11:00AM", "11:30AM",
+                                     "12:00PM", "12:30AM","0:00AM", "0:30AM","0:00AM", "0:30AM",
+                                     "0:00AM", "0:30AM","0:00AM", "0:30AM","0:00AM", "0:30AM",
+                                     "0:00AM", "0:30AM","0:00AM", "0:30AM","0:00AM", "0:30AM",
+                                     "0:00AM", "0:30AM","0:00AM", "0:30AM","0:00AM", "0:30AM"
+                                     ) )
+    value <- a[which(a$name == 1.0 * input$slider), "time"]
+    as.character(value)
+  })
+  
   
   # output map 1
   # need [coor_data]
@@ -194,6 +206,7 @@ server <- function(input, output) {
     coor_data <- coor()
     pal_A <- colorpal_A()
     input_slider_value_A <- input_slider_A()
+    time_A <- time_display_A()
     
     leafletProxy("map2") %>%
       clearShapes() %>% 
@@ -202,6 +215,9 @@ server <- function(input, output) {
         color = pal_A(input_slider_value_A), weight = round(input_slider_value_A/80, digits=0)+10) 
     
     output$traveltimeA <- renderText({input_slider_value_A/60})
+    output$timeA <- renderText({{
+      time_A
+    }})
   })
   
 }

@@ -14,7 +14,8 @@ ui <- fluidPage( theme = "style.css",
                    ),
                    column(6,
                           leafletOutput("map2"),
-                          textOutput("traveltimeA")
+                          textOutput("traveltimeA"),
+                          textOutput("timeA")
                    )
                  ),
                  hr(),
