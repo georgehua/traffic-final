@@ -56,6 +56,7 @@ server <- function(input, output) {
     p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", name = "Before")  
     p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", name = "After") %>% layout(margin = m)
   })
+  
   create_name <- function(dataset) {
     dataset$name
     for(i in 0:47) {
