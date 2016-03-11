@@ -5,7 +5,7 @@ library(jsonlite)
 library(leaflet)
 
 # start shiny part
-ui <- fluidPage(
+ui <- fluidPage(theme = "style.css",
   titlePanel("Traffic Sux"),
   fluidRow(
     column(6,
