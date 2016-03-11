@@ -4,48 +4,6 @@ library(plotly)
 library(jsonlite)
 library(leaflet)
 
-# start shiny part
-<<<<<<< HEAD
-ui <- fluidPage(theme = "style.css",
-=======
-ui <- fluidPage( theme = "style.css",
->>>>>>> 045284d80f803748614774aa68d7d1cd4a095d6d
-  titlePanel("Traffic Sux"),
-  fluidRow(
-    column(6,
-           leafletOutput("map1"),
-           textOutput("traveltimeB")
-    ),
-    column(6,
-           leafletOutput("map2"),
-           textOutput("traveltimeA")
-    )
-  ),
-  hr(),
-  
-  fluidRow(
-    column(4,   selectInput("corridor", label = h3("Corridor"), 
-                            choices = list("Northbound 8th to 527" = "Rd_8th_to_SR527", 
-                                           "Northbound Bellevue to Totem Lake" = "Rd_Bellvue_Totem",
-                                           "Northbound SR520 to NE 70th" = "Rd_SR520_NE70th",
-                                           "Southbound I-5 to 522" = "Rd_I5_to_SR522", 
-                                           "Southbound I-5 to 527" = "Rd_I5_to_SR527",
-                                           "Southbound 85th to 520" = "Rd_NE85th_SR520" 
-                                           ), 
-                            selected = "Rd_8th_to_SR527")
-    ),
-    column(8,   sliderInput("slider", label = h3("Slider"), min = 0.5, 
-                            max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
-    )
-    
-  ),
-  fluidRow(
-    column(6,
-           plotlyOutput("plotBefore")),
-    column(6,
-           plotlyOutput("plotAfter"))
-  )
-)
 
 server <- function(input, output) {
   B_SR520_NE70th <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
@@ -71,7 +29,7 @@ server <- function(input, output) {
       data2 = A_8th_527
     } else if (input$corridor == "Rd_I5_to_SR522") {
       data1 = B_I5_522
-      data2 = A_8th_527
+      data2 = A_I5_522
     } else if (input$corridor == "Rd_Bellvue_Totem") {
       data1 = B_Bellvue_Totem
       data2 = A_Bellvue_Totem
@@ -86,27 +44,25 @@ server <- function(input, output) {
       data2 = A_SR520_NE70th
     }
     
-   p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "Before")  
-  p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "After")
-
+    p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "Before")  
+    p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "After")
   })
-#    output$plotAfter <- renderPlotly({
-#      if (input$corridor == "Rd_8th_to_SR527") {
-#        data2 = A_8th_527
-#      } else if (input$corridor == "Rd_I5_to_SR522") {
-#       data2 = A_8th_527
-#      } else if (input$corridor == "Rd_Bellvue_Totem") {
-#        data2 = A_Bellvue_Totem
-#      } else if (input$corridor == "Rd_I5_to_SR527") {
-#        data2 = A_I5_527
-#      } else if (input$corridor == "Rd_NE85th_SR520") {
-#        data2 = A_85_520
-#      } else {
-#        data2 = A_SR520_NE70th
-#      }
-#      p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "Before")  
-#      p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS, name = "After")
-#    })
+  #   output$plotAfter <- renderPlotly({
+  #     if (input$corridor == "Rd_8th_to_SR527") {
+  #       data2 = A_8th_527
+  #     } else if (input$corridor == "Rd_I5_to_SR522") {
+  #       data2 = A_I5_522
+  #     } else if (input$corridor == "Rd_Bellvue_Totem") {
+  #       data2 = A_Bellvue_Totem
+  #     } else if (input$corridor == "Rd_I5_to_SR527") {
+  #       data2 = A_I5_527
+  #     } else if (input$corridor == "Rd_NE85th_SR520") {
+  #       data2 = A_85_520
+  #     } else {
+  #       data2 = A_SR520_NE70th
+  #     }
+  #     plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
+  #   })
   create_name <- function(dataset) {
     dataset$name
     for(i in 0:47) {
@@ -265,6 +221,3 @@ server <- function(input, output) {
   })
   
 }
-
-# run shiny app
-shinyApp(ui, server)
