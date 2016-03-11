@@ -58,13 +58,8 @@ server <- function(input, output) {
   })
   
   create_name <- function(dataset) {
-    dataset$name
-    for(i in 0:47) {
-      for(j in 1:6) {
-        dataset[j + 6 * i,'name'] <- (i + 1) / 2
-      }
-    }
-    return(dataset)
+    df <- dataset %>% select(Time, Avg..TTS)
+    return(df)
   }
   
   # create the name col for every dataset
@@ -84,8 +79,7 @@ server <- function(input, output) {
   
   # group the dataset and calculate the average TTS
   cal_index <- function(dataset) {
-    average <- dataset %>% group_by(name) %>% summarise(average = mean(Avg..TTS))
-    return(average)
+    return(dataset)
   }
   
   
@@ -147,24 +141,29 @@ server <- function(input, output) {
   # palette 
   colorpal_B <- reactive({
     data_avg_B <- average_B()
-    colorNumeric(palette = c("green", "red"), domain = data_avg_B$average)
+    colorNumeric(palette = c("green", "red"), domain = data_avg_B$Avg..TTS)
   })
   colorpal_A <- reactive({
     data_avg_A <- average_A()
-    colorNumeric(palette = c("green", "red"), domain = data_avg_A$average)
+    colorNumeric(palette = c("green", "red"), domain = data_avg_A$Avg..TTS)
   })
   
   # get average data based on user input
   # need [data_avg, input$slider]
   input_slider_B <- reactive({ 
     data_avg_B <- average_B()
-    return_value <- data_avg_B[which(data_avg_B$name == 1.0 * input$slider),"average"]
+    return_value <- data_avg_B[input$slider,"Avg..TTS"]
     as.numeric(return_value)
   })
   input_slider_A <- reactive({ 
     data_avg_A <- average_A()
-    return_value <- data_avg_A[which(data_avg_A$name == 1.0 * input$slider),"average"]
+    return_value <- data_avg_A[input$slider,"Avg..TTS"]
     as.numeric(return_value)
+  })
+  time_count_A <- reactive({
+    data_avg_A <- average_A()
+    return_value <- data_avg_A[input$slider,"Time"]
+    as.character(return_value)
   })
   
   
@@ -204,6 +203,8 @@ server <- function(input, output) {
     coor_data <- coor()
     pal_A <- colorpal_A()
     input_slider_value_A <- input_slider_A()
+    data_avg_A <- average_A()
+    time_A <- time_count_A()
     
     leafletProxy("map2") %>%
       clearShapes() %>% 
@@ -211,6 +212,7 @@ server <- function(input, output) {
         lng=coor_data$X2, lat=coor_data$X1, stroke = TRUE, opacity = 0.5, smoothFactor = 0.5,
         color = pal_A(input_slider_value_A), weight = round(input_slider_value_A/80, digits=0)+10) 
     
+    output$time_count <- renderText({time_A})
     output$traveltimeA <- renderText({paste(round(input_slider_value_A/60, digits = 2), "min")})
   })
   
