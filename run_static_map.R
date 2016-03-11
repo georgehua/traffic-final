@@ -5,11 +5,9 @@ library(jsonlite)
 library(leaflet)
 
 # start shiny part
-<<<<<<< HEAD
-ui <- fluidPage(theme = "style.css",
-=======
+
 ui <- fluidPage( theme = "style.css",
->>>>>>> 045284d80f803748614774aa68d7d1cd4a095d6d
+
   titlePanel("Traffic Sux"),
   fluidRow(
     column(6,
@@ -46,6 +44,7 @@ ui <- fluidPage( theme = "style.css",
            plotlyOutput("plotAfter"))
   )
 )
+
 
 server <- function(input, output) {
   B_SR520_NE70th <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
