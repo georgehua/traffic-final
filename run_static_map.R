@@ -19,9 +19,9 @@ ui <- fluidPage(
   
   fluidRow(
     column(4,   selectInput("corridor", label = h3("Corridor"), 
-                            choices = list("8th to 527" = "Rd_8th_to_SR527", "520 to 70" = "Rd_520_70",
+                            choices = list("8th to 527" = "Rd_8th_to_SR527", "Bellvue to Totem Lake" = "Rd_Bellvue_Totem",
                                            "I-5 to 522" = "Rd_I5_to_SR522", "I-5 to 527" = "Rd_I5_to_SR527",
-                                           "85th to 520" = "Rd_NE85th_SR520", "520 to NE 70th" = "Rd_SR520_NE70th"), 
+                                           "85th to 520" = "Rd_NE85th_SR520", "SR520 to NE 70th" = "Rd_SR520_NE70th"), 
                             selected = "Rd_8th_to_SR527")
     ),
     column(8,   sliderInput("slider", label = h3("Slider"), min = 0, 
@@ -38,12 +38,12 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
-  B_520_70 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
-  A_520_70 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20SR%20520%20to%20NE%2070.csv")
+  B_SR520_NE70th <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
+  A_SR520_NE70th <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20SR%20520%20to%20NE%2070.csv")
   A_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%208th%20to%20SR%20527.csv")
   B_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%208th%20to%20SR%20527.csv")
   A_Bellvue_Totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20Bellevue%20to%20Totem%20Lk.csv")
-  B_Bellvue_totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20Bell%20to%20Ttm%20Lk.csv")
+  B_Bellvue_Totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20Bell%20to%20Ttm%20Lk.csv")
   A_I5_522 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20I5%20to%20522.csv")
   B_I5_522 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%201-5%20to%20522.csv")
   A_I5_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20I-5%20to%20SR%20527.csv")
@@ -60,14 +60,14 @@ server <- function(input, output) {
       data1 = B_8th_527
     } else if (input$corridor == "Rd_I5_to_SR522") {
       data1 = B_I5_522
-    } else if (input$corridor == "Rd_520_70") {
-      data1 = B_520_70
+    } else if (input$corridor == "Rd_Bellvue_Totem") {
+      data1 = B_Bellvue_Totem
     } else if (input$corridor == "Rd_I5_to_SR527") {
       data1 = B_I5_527
     } else if (input$corridor == "Rd_NE85th_SR520") {
       data1 = B_85_520
     } else {
-      data1 = B_520_70
+      data1 = B_SR520_NE70th
     }
     
     plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
@@ -77,14 +77,14 @@ server <- function(input, output) {
       data2 = A_8th_527
     } else if (input$corridor == "Rd_I5_to_SR522") {
       data2 = A_I5_522
-    } else if (input$corridor == "Rd_520_70") {
-      data2 = A_520_70
+    } else if (input$corridor == "Rd_Bellvue_Totem") {
+      data2 = A_Bellvue_Totem
     } else if (input$corridor == "Rd_I5_to_SR527") {
       data2 = A_I5_527
     } else if (input$corridor == "Rd_NE85th_SR520") {
       data2 = A_85_520
     } else {
-      data2 = A_520_70
+      data2 = A_SR520_NE70th
     }
     plot_ly(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", color = Avg..TTS)
   })
@@ -99,12 +99,12 @@ server <- function(input, output) {
   }
   
   # create the name col for every dataset
-  B_520_70 <- create_name(B_520_70)
-  A_520_70 <- create_name(A_520_70)
+  B_SR520_NE70th <- create_name(B_SR520_NE70th)
+  A_SR520_NE70th <- create_name(A_SR520_NE70th)
   A_8th_527 <- create_name(A_8th_527)
   B_8th_527 <- create_name(B_8th_527)
   A_Bellvue_Totem <- create_name(A_Bellvue_Totem)
-  B_Bellvue_totem <- create_name(B_Bellvue_totem)
+  B_Bellvue_Totem <- create_name(B_Bellvue_Totem)
   A_I5_522 <- create_name(A_I5_522)
   B_I5_522 <- create_name(B_I5_522)
   A_I5_527 <- create_name(A_I5_527)
@@ -122,12 +122,12 @@ server <- function(input, output) {
   
   # This is the final df we use for displaying traffic situation
   # Note the difference between A and B
-  B_Rd_520_70_average <- cal_index(B_520_70)
-  A_Rd_520_70_average <- cal_index(A_520_70)
+  B_Rd_SR520_NE70th_average <- cal_index(B_SR520_NE70th)
+  A_Rd_SR520_NE70th_average <- cal_index(A_SR520_NE70th)
   B_Rd_8th_to_SR527_average <- cal_index(B_8th_527)
   A_Rd_8th_to_SR527_average <- cal_index(A_8th_527)
-  B_Rd_Bellvue_Totem_average <- cal_index(B_Bellvue_totem)
-  A_Rd_Bellvue_totem_average <- cal_index(A_Bellvue_Totem)
+  B_Rd_Bellvue_Totem_average <- cal_index(B_Bellvue_Totem)
+  A_Rd_Bellvue_Totem_average <- cal_index(A_Bellvue_Totem)
   B_Rd_I5_to_SR522_average <- cal_index(B_I5_522)
   A_Rd_I5_to_SR522_average <- cal_index(A_I5_522)
   B_Rd_I5_to_SR527_average <- cal_index(B_I5_527)
@@ -153,7 +153,7 @@ server <- function(input, output) {
   
   # they are the df we use to locate the road
   Rd_8th_to_SR527_points <- parseData(url_8th_to_SR527)
-  Rd_520_70_points <- parseData(url_Bell_to_Totemlk)
+  Rd_Bellvue_Totem_points <- parseData(url_Bell_to_Totemlk)
   Rd_I5_to_SR522_points <- parseData(url_I5_to_SR522)
   Rd_I5_to_SR527_points <- parseData(url_I5_to_SR527)
   Rd_NE85th_SR520_points <- parseData(url_NE85th_SR520)
