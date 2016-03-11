@@ -9,10 +9,12 @@ ui <- fluidPage(
   titlePanel("Traffic Sux"),
   fluidRow(
     column(6,
-           leafletOutput("map1")
+           leafletOutput("map1"),
+           textOutput("traveltimeB")
     ),
     column(6,
-           leafletOutput("map2")
+           leafletOutput("map2"),
+           textOutput("traveltimeA")
     )
   ),
   hr(),
@@ -239,6 +241,8 @@ server <- function(input, output) {
       addPolylines(
         lng=coor_data$X2, lat=coor_data$X1, stroke = TRUE, opacity = 0.5, smoothFactor = 0.5,
         color = pal_B(input_slider_value_B), weight = round(input_slider_value_B/80, digits=0)+10) 
+    
+    output$traveltimeB <- renderText({input_slider_value_B/60})
   })
   observe({
     coor_data <- coor()
@@ -250,6 +254,8 @@ server <- function(input, output) {
       addPolylines(
         lng=coor_data$X2, lat=coor_data$X1, stroke = TRUE, opacity = 0.5, smoothFactor = 0.5,
         color = pal_A(input_slider_value_A), weight = round(input_slider_value_A/80, digits=0)+10) 
+    
+    output$traveltimeA <- renderText({input_slider_value_A/60})
   })
   
 }
