@@ -54,7 +54,7 @@ server <- function(input, output) {
   # the function that assign every 6 rows(30mins) the same name
   # for the sake of group_by() the dataset
   output$plotBefore <- renderPlotly({
-
+    
     
     if (input$corridor == "Rd_8th_to_SR527") {
       data1 = B_8th_527
@@ -122,8 +122,8 @@ server <- function(input, output) {
   
   # This is the final df we use for displaying traffic situation
   # Note the difference between A and B
-  B_Rd_SR520_NE70th_average <- cal_index(B_520_70)
-  A_Rd_SR520_NE70th_average <- cal_index(A_520_70)
+  B_Rd_520_70_average <- cal_index(B_520_70)
+  A_Rd_520_70_average <- cal_index(A_520_70)
   B_Rd_8th_to_SR527_average <- cal_index(B_8th_527)
   A_Rd_8th_to_SR527_average <- cal_index(A_8th_527)
   B_Rd_Bellvue_Totem_average <- cal_index(B_Bellvue_totem)
@@ -166,7 +166,7 @@ server <- function(input, output) {
     eval(parse(text = paste0(input$corridor, "_points")))
     
   })
-
+  
   # data for average
   average_B <- reactive({ 
     eval(parse(text = paste0("B_", input$corridor, "_average")))
@@ -214,7 +214,7 @@ server <- function(input, output) {
       fitBounds(lng1 = min(coor_data$X2), lat1 = max(coor_data$X1), lng2 = max(coor_data$X2), lat2 = min(coor_data$X1))
   })
   
-
+  
   
   # add stuffs on map1 
   # [need read: data_avg, coor_data, input$slider, input_slider_value, pal]
