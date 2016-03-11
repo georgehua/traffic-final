@@ -6,6 +6,7 @@ library(leaflet)
 
 # start shiny part
 ui <- fluidPage(
+  titlePanel("Traffic Sux"),
   fluidRow(
     column(6,
            leafletOutput("map1")
@@ -37,18 +38,18 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
-  B_520_70 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
-  A_520_70 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/After%20SR%20520%20to%20NE%2070.csv")
-  A_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/After%208th%20to%20SR%20527.csv")
-  B_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/Before%208th%20to%20SR%20527.csv")
-  A_Bellvue_Totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/After%20Bellevue%20to%20Totem%20Lk.csv")
-  B_Bellvue_totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/Before%20Bell%20to%20Ttm%20Lk.csv")
-  A_I5_522 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/After%20I-5%20to%20522.csv")
-  B_I5_522 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/Before%201-5%20to%20522.csv")
-  A_I5_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/After%20I-5%20to%20SR%20527.csv")
-  B_I5_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/Before%20I-5%20to%20SR527.csv")
-  A_85_520 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/After%20NE85th%20to%20520.csv")
-  B_85_520 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/george/data(new)/Before%20NE85th%20to%20520.csv")
+  B_520_70 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
+  A_520_70 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20SR%20520%20to%20NE%2070.csv")
+  A_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%208th%20to%20SR%20527.csv")
+  B_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%208th%20to%20SR%20527.csv")
+  A_Bellvue_Totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20Bellevue%20to%20Totem%20Lk.csv")
+  B_Bellvue_totem <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20Bell%20to%20Ttm%20Lk.csv")
+  A_I5_522 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20I5%20to%20522.csv")
+  B_I5_522 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%201-5%20to%20522.csv")
+  A_I5_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20I-5%20to%20SR%20527.csv")
+  B_I5_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20I-5%20to%20SR527.csv")
+  A_85_520 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20NE85th%20to%20520.csv")
+  B_85_520 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20NE85th%20to%20520.csv")
   
   # the function that assign every 6 rows(30mins) the same name
   # for the sake of group_by() the dataset
