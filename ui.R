@@ -9,8 +9,12 @@ ui <- fluidPage( theme = "style.css",
                  
                  tags$div(id="innerBody",
                  
-                 tags$h1("Chasing Cars", tags$h6("The Slow and The Furious: The Story of Rush Hour Traffic")),
+                 tags$h1(id="title1","Chasing Cars", tags$h6(id="title2", "The Slow and The Furious: The Story of Rush Hour Traffic")),
             
+                 tags$div(id="introText", 
+                          tags$p("This document describes the travel time changes occurring in the I-405 corridor between downtown Bellevue and I-5 at Lynnwood for different trips.  In all cases, it compares changes in travel times from the Before period of October 1, 2014, to January 1, 2015, before implementation of the Express Toll Lanes, with the After period of October 1, 2015, to January 31, 2016, after the lanes' implementation.  All trips examined are in the general purpose lanes.
+                                 The selected time period, October through January, includes two major holidays, Christmas and New Year's. It also includes some of the worst weather Seattle typically observes during the year.  As a result, both the Before and After periods likely experienced traffic conditions that were more variable than at other times of the year.  Sourced from Mark Hallenbeck")
+                          ),
                  
                  fluidRow(
                    column(4,   selectInput("corridor", label = h3("Corridor"), 
@@ -37,9 +41,9 @@ ui <- fluidPage( theme = "style.css",
                  
                  fluidRow(
 
-                   column(12,   sliderInput("slider", label = h3("Slider"), min = 0.5, 
+                   column(12,   tags$div(id="sliderhide",sliderInput("slider", label = h6("Select Time or Press Play"), min = 0.5, 
                               max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
-                 ),
+                 )),
                  fluidRow(
                    column(12,
                           plotlyOutput("plotBefore"))

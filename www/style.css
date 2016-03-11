@@ -68,3 +68,7 @@ ton,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{ov
 #traveltimeB, #traveltimeA {
 	font-size: 1.5em;
 }
+
+p {
+    text-indent: 50px;
+}
