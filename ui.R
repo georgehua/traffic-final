@@ -36,9 +36,7 @@ ui <- fluidPage( theme = "style.css",
                    
                  ),
                  fluidRow(
-                   column(6,
-                          plotlyOutput("plotBefore")),
-                   column(6,
-                          plotlyOutput("plotAfter"))
+                   column(12,
+                          plotlyOutput("plotBefore"))
                  )
 )
