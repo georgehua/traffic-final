@@ -44,9 +44,17 @@ server <- function(input, output) {
       data2 = A_SR520_NE70th
     }
     
+    #sets margins for graph
+    m = list(
+      l = 0,
+      r = 0,
+      b = 100,
+      t = 0,
+      pad = 4)
+    
     # plots graph with after data on top
     p <- plot_ly(data = data1, x = Time, y = Avg..TTS / 60, mode = "markers", name = "Before")  
-    p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", name = "After")
+    p <- add_trace(data = data2, x = Time, y = Avg..TTS / 60, mode = "markers", name = "After") %>% layout(margin = m)
   })
   create_name <- function(dataset) {
     dataset$name
