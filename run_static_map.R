@@ -19,12 +19,16 @@ ui <- fluidPage(
   
   fluidRow(
     column(4,   selectInput("corridor", label = h3("Corridor"), 
-                            choices = list("8th to 527" = "Rd_8th_to_SR527", "Bellvue to Totem Lake" = "Rd_Bellvue_Totem",
-                                           "I-5 to 522" = "Rd_I5_to_SR522", "I-5 to 527" = "Rd_I5_to_SR527",
-                                           "85th to 520" = "Rd_NE85th_SR520", "SR520 to NE 70th" = "Rd_SR520_NE70th"), 
+                            choices = list("Northbound 8th to 527" = "Rd_8th_to_SR527", 
+                                           "Northbound Bellevue to Totem Lake" = "Rd_Bellvue_Totem",
+                                           "Northbound SR520 to NE 70th" = "Rd_SR520_NE70th",
+                                           "Southbound I-5 to 522" = "Rd_I5_to_SR522", 
+                                           "Southbound I-5 to 527" = "Rd_I5_to_SR527",
+                                           "Southbound 85th to 520" = "Rd_NE85th_SR520" 
+                                           ), 
                             selected = "Rd_8th_to_SR527")
     ),
-    column(8,   sliderInput("slider", label = h3("Slider"), min = 0, 
+    column(8,   sliderInput("slider", label = h3("Slider"), min = 0.5, 
                             max = 24, step=0.5, animate= animationOptions(loop = TRUE, interval = 300), value = 0, width = "100%")
     )
     
