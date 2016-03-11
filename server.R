@@ -3,9 +3,10 @@ library(dplyr)
 library(plotly)
 library(jsonlite)
 library(leaflet)
-
+library(rsconnect)
 
 server <- function(input, output) {
+  
   B_SR520_NE70th <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/Before%20SR%20520%20to%20NE%2070th.csv")
   A_SR520_NE70th <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%20SR%20520%20to%20NE%2070.csv")
   A_8th_527 <- read.csv("https://raw.githubusercontent.com/joycieyu/traffic-final/master/data(new)/After%208th%20to%20SR%20527.csv")
