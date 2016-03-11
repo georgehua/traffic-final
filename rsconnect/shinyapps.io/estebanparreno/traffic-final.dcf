@@ -2,8 +2,8 @@ name: traffic-final
 account: estebanparreno
 server: shinyapps.io
 appId: 88344
-bundleId: 393342
+bundleId: 393467
 url: https://estebanparreno.shinyapps.io/traffic-final/
-when: 1457720922.44055
+when: 1457730891.80108
 asMultiple: FALSE
 asStatic: FALSE

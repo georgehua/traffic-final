@@ -8,12 +8,14 @@ library(rsconnect)
 # start shiny part
 ui <- fluidPage( theme = "style.css",
                  
+                 tags$head(tags$link(rel="shortcut icon", href="/favcon.png")),
+                 
                  tags$div(id="innerBody",
                  
-                 tags$h1(id="title1","Chasing Cars", tags$h6(id="title2", "The Slow and The Furious: The Story of Rush Hour Traffic")),
+                 tags$h1(id="title1","I-405 Changes", tags$h6(id="title2", "Travel Time Analysis of the Toll Lane Implementation")),
             
                  tags$div(id="introText", 
-                          tags$p("This document describes the travel time changes occurring in the I-405 corridor between downtown Bellevue and I-5 at Lynnwood for different trips.  In all cases, it compares changes in travel times from the Before period of October 1, 2014, to January 1, 2015, before implementation of the Express Toll Lanes, with the After period of October 1, 2015, to January 31, 2016, after the lanes' implementation.  All trips examined are in the general purpose lanes.
+                          tags$p("The charts describes the travel time changes occurring in the I-405 corridor between downtown Bellevue and I-5 at Lynnwood for different trips.  In all cases, it compares changes in travel times from the before period of October 1, 2014, to January 1, 2015, before implementation of the Express Toll Lanes, with the After period of October 1, 2015, to January 31, 2016, after the lanes' implementation.  All trips examined are in the general purpose lanes.
                                  The selected time period, October through January, includes two major holidays, Christmas and New Year's. It also includes some of the worst weather Seattle typically observes during the year.  As a result, both the Before and After periods likely experienced traffic conditions that were more variable than at other times of the year.",  tags$sup("Sourced from Mark Hallenbeck"))
                           ),
                  
@@ -55,7 +57,9 @@ ui <- fluidPage( theme = "style.css",
                  fluidRow(
                    column(12,
                           plotlyOutput("plotBefore"))
-                 )
+                 ),
+                 tags$p("Special thanks to Mark Hallenbeck and TRAC-UW for providing us with the data."),
+                 tags$p("Created by Denny Lim, Esteban Parreno, George Hua, Joycie Yu")
                 )
                 )
 )

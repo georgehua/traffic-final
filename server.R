@@ -155,12 +155,32 @@ server <- function(input, output) {
   
   # palette 
   colorpal_B <- reactive({
+    data_avg_A <- average_A()
     data_avg_B <- average_B()
-    colorNumeric(palette = c("green", "red"), domain = data_avg_B$Avg..TTS)
-  })
+    
+    if (sum(data_avg_A$x2) > sum(data_avg_B$x2)) {
+      this_domain <- data_avg_A
+      this_domain_min <- data_avg_B
+    } else {
+      this_domain <- data_avg_B
+      this_domain_min <- data_avg_A
+    }  
+    
+    colorNumeric(palette = c("green", "red"), domain = c(min(this_domain_min$Avg..TTS)-10, max(this_domain$Avg..TTS)))
+  })  
   colorpal_A <- reactive({
     data_avg_A <- average_A()
-    colorNumeric(palette = c("green", "red"), domain = data_avg_A$Avg..TTS)
+    data_avg_B <- average_B()
+    
+    if (sum(data_avg_A$x2) > sum(data_avg_B$x2)) {
+      this_domain <- data_avg_A
+      this_domain_min <- data_avg_B
+    } else {
+      this_domain <- data_avg_B
+      this_domain_min <- data_avg_A
+    }  
+    
+    colorNumeric(palette = c("green", "red"), domain = c(min(this_domain_min$Avg..TTS)-10, max(this_domain$Avg..TTS)))
   })
   
   # get average data based on user input
@@ -220,6 +240,7 @@ server <- function(input, output) {
     input_slider_value_A <- input_slider_A()
     data_avg_A <- average_A()
     time_A <- time_count_A()
+
     
     leafletProxy("map2") %>%
       clearShapes() %>% 
